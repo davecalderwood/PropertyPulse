@@ -19,8 +19,6 @@ const PropertyCard = ({ property }) => {
             return `$${rates.nightly.toLocaleString()}/night`;
         }
     };
-    console.log(`/images/properties/${property.images[0]}`)
-    //console.log(property)
 
     return (
         <div className='rounded-xl shadow-md relative'>
