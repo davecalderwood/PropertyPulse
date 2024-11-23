@@ -1,5 +1,4 @@
 import { Schema, model, models } from "mongoose";
-import { unique } from "next/dist/build/utils";
 
 const UserSchema = new Schema({
     email: {
@@ -7,7 +6,7 @@ const UserSchema = new Schema({
         unique: [true, 'Email already exists'],
         required: [true, 'Email is required']
     },
-    userName: {
+    username: {
         type: String,
         required: [true, 'Username is required']
     },

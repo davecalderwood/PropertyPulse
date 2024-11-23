@@ -10,10 +10,7 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Navbar = () => {
     const { data: session } = useSession();
-    console.log("session ", session)
-    console.log("GOOGLE_CLIENT_ID (server):", process.env.GOOGLE_CLIENT_ID);
-    console.log("GOOGLE_CLIENT_SECRET (server):", process.env.GOOGLE_CLIENT_SECRET);
-
+    const profileImage = session?.user?.image;
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -24,7 +21,6 @@ const Navbar = () => {
             try {
                 const res = await getProviders();
                 setProviders(res);
-                console.log("response ", res);
             } catch (error) {
                 console.error("Error fetching auth providers:", error);
             }
@@ -147,8 +143,10 @@ const Navbar = () => {
                                         <span className='sr-only'>Open user menu</span>
                                         <Image
                                             className='h-8 w-8 rounded-full'
-                                            src={profileDefault}
+                                            src={profileImage || profileDefault}
                                             alt=''
+                                            width={40}
+                                            height={40}
                                         />
                                     </button>
                                 </div>
@@ -183,6 +181,10 @@ const Navbar = () => {
                                             className='block px-4 py-2 text-sm text-gray-700'
                                             tabIndex={-1}
                                             id='user-menu-item-2'
+                                            onClick={() => {
+                                                setIsProfileMenuOpen(false)
+                                                signOut()
+                                            }}
                                         >
                                             Sign Out
                                         </button>

@@ -22,6 +22,7 @@ export const authOptions = {
     callbacks: {
         // Invoked on successfull signin
         async signIn({ profile }) {
+            console.log("Google profile:", profile);
             // 1. Connect to database
             await connectDB();
             // 2. Check if user exists
