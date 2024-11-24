@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import AuthProvider from "@/components/auth/auth-provider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { MessageProvider } from "@/context/MessageContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,16 +27,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Navbar />
-          {children}
-          <Footer />
-          <ToastContainer />
-        </body>
-      </html>
+      <MessageProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Navbar />
+            {children}
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </MessageProvider>
     </AuthProvider>
   );
 }
